@@ -436,7 +436,6 @@ document.addEventListener("DOMContentLoaded", function (_e) {
 
      var fSort = null;
 
-    console.log(stations);
     fSort = function (id1,id2) {
         return distance(latitude, longitude,stations[id1].lat,stations[id1].lon)<
         distance(latitude, longitude,stations[id2].lat,stations[id2].lon);
@@ -455,6 +454,8 @@ document.addEventListener("DOMContentLoaded", function (_e) {
      *      - en les filtrant avec les résultats avec la fonction fFiltre
      */
     function remplirStations() {
+        console.log(stations);
+
         var r = "";
         // si un tri existe alors on trie par ordre alphabétique, sinon on trie par ordre alphabetique
         var keys = fSort ? Object.keys(stations).sort(fSort) : Object.keys(stations).sort();
