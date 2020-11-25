@@ -434,9 +434,7 @@ document.addEventListener("DOMContentLoaded", function (_e) {
      *  @return Number          < 0 si id1 précède id2, > 0 si id2 précède id1
      */
 
-     var fSort = null;
-
-    fSort = function (id1,id2) {
+    var fSort = function (id1,id2) {
         return distance(latitude, longitude,stations[id1].lat,stations[id1].lon)<
         distance(latitude, longitude,stations[id2].lat,stations[id2].lon);
     };
@@ -445,8 +443,7 @@ document.addEventListener("DOMContentLoaded", function (_e) {
      *  @param  Object  st      l'objet Station à évaluer
      *  @return boolean         true si la station doit être affichée, false sinon
      */
-    var fFilter = null;
-    fFilter = function name(st) {
+    var fFilter = function name(st) {
         return true;
     }
     
