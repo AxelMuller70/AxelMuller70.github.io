@@ -404,13 +404,37 @@ document.addEventListener("DOMContentLoaded", function (_e) {
             Fonctions utilisées pour remplir la liste des stations 
     **************************************************************************/
     
+   var distance = function (lat1,lon1,lat2,lon2) {
+    const R = 6371e3; // metres
+    const p1 = lat1 * Math.PI/180; // p,l in radians
+    const p2 = lat2 * Math.PI/180;
+    const dp = (lat2-lat1) * Math.PI/180;
+    const dl = (lon2-lon1) * Math.PI/180;
+
+    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c; // in metres
+}
+
     /** 
      *  Détermine si la station id1 précède ou pas la station id2.
      *  @param  String  id1     identifiant de station (ex. "st_battant")
      *  @param  String  id2     identifiant de station (ex. "st_battant")
      *  @return Number          < 0 si id1 précède id2, > 0 si id2 précède id1
      */
-    var fSort = null;
+
+     var fSort = null;
+
+    if ("geolocation" in navigator) {
+        console.log(stations)
+        fSort = function (id1,id2) {
+            return distance(position.coords.latitude, position.coords.longitude,stations[id1].lat,stations[id1].lon)<
+            distance(position.coords.latitude, position.coords.longitude,stations[id2].lat,stations[id2].lon);
+        }
+    };
     
     /** Détermine si la station passée en paramètre doit être affichée ou pas.
      *  @param  Object  st      l'objet Station à évaluer
