@@ -1,4 +1,4 @@
-var cacheName = 'ginko';
+var cacheName = 'js13kPWA-v1';
 var appShellFiles = [
 '/index.html',
 '/app.js',
