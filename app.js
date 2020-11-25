@@ -428,12 +428,10 @@ document.addEventListener("DOMContentLoaded", function (_e) {
 
      var fSort = null;
 
-    if ("geolocation" in navigator) {
-        console.log(stations)
-        fSort = function (id1,id2) {
-            return distance(position.coords.latitude, position.coords.longitude,stations[id1].lat,stations[id1].lon)<
-            distance(position.coords.latitude, position.coords.longitude,stations[id2].lat,stations[id2].lon);
-        }
+    console.log(stations);
+    fSort = function (id1,id2) {
+        return distance(position.coords.latitude, position.coords.longitude,stations[id1].lat,stations[id1].lon)<
+        distance(position.coords.latitude, position.coords.longitude,stations[id2].lat,stations[id2].lon);
     };
     
     /** Détermine si la station passée en paramètre doit être affichée ou pas.
