@@ -446,7 +446,9 @@ document.addEventListener("DOMContentLoaded", function (_e) {
      *  @return boolean         true si la station doit être affichée, false sinon
      */
     var fFilter = null;
-    
+    fFilter = function name(st) {
+        return true;
+    }
     
     /** 
      *  Fonction permettant de remplir la liste des stations de #bcStations :
