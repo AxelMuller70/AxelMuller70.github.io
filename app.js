@@ -1,6 +1,12 @@
 "use strict";
 
+var latitude = null,
+longitude = null;
 
+navigator.geolocation.getCurrentPosition(function(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+  });
 
 /************************************************************************
  *                                                                      *
@@ -405,19 +411,21 @@ document.addEventListener("DOMContentLoaded", function (_e) {
     **************************************************************************/
     
    var distance = function (lat1,lon1,lat2,lon2) {
-    const R = 6371e3; // metres
-    const p1 = lat1 * Math.PI/180; // p,l in radians
-    const p2 = lat2 * Math.PI/180;
-    const dp = (lat2-lat1) * Math.PI/180;
-    const dl = (lon2-lon1) * Math.PI/180;
+        const R = 6371e3; // metres
+        const p1 = lat1 * Math.PI/180; // p,l in radians
+        const p2 = lat2 * Math.PI/180;
+        const dp = (lat2-lat1) * Math.PI/180;
+        const dl = (lon2-lon1) * Math.PI/180;
 
-    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-            Math.cos(φ1) * Math.cos(φ2) *
-            Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const a = Math.sin(dp/2) * Math.sin(dp/2) +
+                Math.cos(p1) * Math.cos(p2) *
+                Math.sin(dl/2) * Math.sin(dl/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-    return R * c; // in metres
-}
+        return R * c; // in metres
+    }
+
+
 
     /** 
      *  Détermine si la station id1 précède ou pas la station id2.
@@ -430,8 +438,8 @@ document.addEventListener("DOMContentLoaded", function (_e) {
 
     console.log(stations);
     fSort = function (id1,id2) {
-        return distance(position.coords.latitude, position.coords.longitude,stations[id1].lat,stations[id1].lon)<
-        distance(position.coords.latitude, position.coords.longitude,stations[id2].lat,stations[id2].lon);
+        return distance(latitude, longitude,stations[id1].lat,stations[id1].lon)<
+        distance(latitude, longitude,stations[id2].lat,stations[id2].lon);
     };
     
     /** Détermine si la station passée en paramètre doit être affichée ou pas.
